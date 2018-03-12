@@ -1,8 +1,9 @@
 import fetchJsonp from 'fetch-jsonp'
 import qs from 'qs'
+import { api } from '../yahoo-api.json'
 
 const API_URL = 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/categoryRanking'
-const APP_ID = 'XXXXXXXXXXXXXX'
+const APP_ID = api
 
 const startRequest = (categoryId) => ({
   type: 'START_REQUEST',
