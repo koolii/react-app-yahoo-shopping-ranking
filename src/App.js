@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 
 // stateを使用するため素のcomponentからでなくcontainerから取得
+// containerがcomponentを使うためのデータを作成し、それをcomponentに渡している
 import Ranking from './containers/Ranking'
+import Nav from './containers/Nav'
 
 class App extends Component {
   render() {
@@ -11,22 +13,20 @@ class App extends Component {
         {/*
           カテゴリ名、IDはハードコーディング
         */}
-        <ul>
-          <li><Link to="/all">All categories</Link></li>
-          <li><Link to="/category/2502">computers</Link></li>
-          <li><Link to="/category/10002">books</Link></li>
-        </ul>
+        <Nav />
 
-        <Route path="/all" component={Ranking} />
-        <Route
-          path="/category/:id"
-          render={
-            ({ match }) => <Ranking categoryId={match.params.id} />
-          }
-        />
+        <Switch>
+          <Route path="/all" component={Ranking} />
+          <Route
+            path="/category/:id"
+            render={
+              ({ match }) => <Ranking categoryId={match.params.id} />
+            }
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default App

@@ -5,10 +5,12 @@ import { api } from '../yahoo-api.json'
 const API_URL = 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/categoryRanking'
 const APP_ID = api
 
+// このアクションの時にstate情報をリセットする
 const startRequest = (categoryId) => ({
   type: 'START_REQUEST',
   payload: { categoryId },
 })
+// APIからのレスポンスを適用させる
 const receiveData = (categoryId, error, response) => ({
   type: 'RECEIVE_DATA',
   payload: { categoryId, error, response },

@@ -1,4 +1,2 @@
-// 何もしないReducer
-// exportしてるnoopが
-// １つのstateを特定するためのkeyとして動作する
-export const noop = (state = {}) => state;
+export { default as ranking } from './Ranking'
+export { default as shopping } from './shopping'
