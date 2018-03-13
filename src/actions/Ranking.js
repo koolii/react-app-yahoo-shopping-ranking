@@ -1,28 +1,39 @@
 import fetchJsonp from 'fetch-jsonp'
 import qs from 'qs'
+import { replace } from 'react-router-redux'
 import { api } from '../yahoo-api.json'
 
 const API_URL = 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/categoryRanking'
 const APP_ID = api
 
 // このアクションの時にstate情報をリセットする
-const startRequest = (categoryId) => ({
+const startRequest = (category) => ({
   type: 'START_REQUEST',
-  payload: { categoryId },
+  payload: { category },
 })
 // APIからのレスポンスを適用させる
-const receiveData = (categoryId, error, response) => ({
+const receiveData = (category, error, response) => ({
   type: 'RECEIVE_DATA',
-  payload: { categoryId, error, response },
+  payload: { category, error, response },
 })
-const finishRequest = (categoryId) => ({
+const finishRequest = (category) => ({
   type: 'FINISH_REQUEST',
-  payload: { categoryId },
+  payload: { category },
 })
 
 // redux-thunk
 export const fetchRanking = (categoryId) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    // カテゴリIDに紐づくstate.shopping.categoriesにアクセス
+    // 存在しないcategoryIdでHTTPアクセスしない(存在しないIDだった場合は'/'にリダイレクト)
+    const categories = getState().shopping.categories
+    const category = categories.find((category) => (category.id === categoryId))
+    if (typeof category === 'undefined') {
+      dispatch(replace('/'))
+      return;
+    }
+
+    // 当てはまるcategoryIdが存在したので正常にHTTPアクセスを行なう
     dispatch(startRequest(categoryId))
 
     const queryString = qs.stringify({
@@ -31,13 +42,14 @@ export const fetchRanking = (categoryId) => {
     })
 
     try {
-      const url = API_URL + '?' + queryString
-      const response = await fetchJsonp(url)
+      const response = await fetchJsonp(`${API_URL}?${queryString}`)
       const data = await response.json()
-      dispatch(receiveData(categoryId, null, data))
+      console.log('RECEIVE_DATA')
+      dispatch(receiveData(category, null, data))
     } catch (err) {
-      dispatch(receiveData(categoryId, err))
+      dispatch(receiveData(category, err))
     }
-    dispatch(finishRequest(categoryId))
+    console.log('FINISHED')
+    dispatch(finishRequest(category))
   }
 }
