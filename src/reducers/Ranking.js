@@ -4,13 +4,12 @@
 // export const noop = (state = {}) => state;
 
 const getRanking = (response) => {
-  console.log('GET RANKING GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
   const ranking = []
   const itemLength = response.ResultSet.totalResultsReturned
 
   for (let index = 0; index < itemLength; index += 1) {
     // const item = response.ResultSet['0'].Result[`${index}`]
-    const item = response.ResultSet['0'].Result['0']
+    const item = response.ResultSet['0'].Result[index + '']
     ranking.push({
       code: item.Code,
       name: item.Name,
@@ -18,6 +17,7 @@ const getRanking = (response) => {
       imageUrl: item.Image.Medium,
     })
   }
+  return ranking
 }
 
 const initialState = {
@@ -44,12 +44,13 @@ export default (state = initialState, action) => {
       console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((')
       console.log(JSON.stringify(action.playload.response))
       console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((')
-      return action.error ? { ...state, error: true } : { ...state, ranking: getRanking(action.payload.response) }
+      return action.error
+        ? { ...state, error: true }
+        : {
+          ...state,
+          ranking: getRanking(action.payload.response),
+        }
     default:
-      console.log('OH MY GOSH')
-      console.log('OH MY GOSH')
-      console.log('OH MY GOSH')
-      console.log('OH MY GOSH')
       return state
   }
 }
