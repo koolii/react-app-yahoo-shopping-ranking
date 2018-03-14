@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
 // stateを使用するため素のcomponentからでなくcontainerから取得
 // containerがcomponentを使うためのデータを作成し、それをcomponentに渡している
@@ -17,6 +17,10 @@ class App extends Component {
 
         <Switch>
           <Route path="/all" component={Ranking} />
+          <Route
+            path="/category/1"
+            render={() => <Redirect to="/all" />}
+          />
           <Route
             path="/category/:id"
             render={

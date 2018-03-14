@@ -25,12 +25,8 @@ const initialState = {
   ranking: undefined,
   error: false,
 }
-const log = (action) => {
-  console.log(`NOW ACTION TYPE IS ${JSON.stringify(action)}`)
-}
 
 export default (state = initialState, action) => {
-  log(action)
   switch (action.type) {
     // このアクションの時にstate情報をリセットする
     case 'START_REQUEST':
@@ -41,13 +37,11 @@ export default (state = initialState, action) => {
         error: false,
       }
     case 'RECEIVE_DATA':
-      console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((')
-      console.log(JSON.stringify(action.playload.response))
-      console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((')
       return action.error
         ? { ...state, error: true }
         : {
           ...state,
+          category: action.payload.category,
           ranking: getRanking(action.payload.response),
         }
     default:
