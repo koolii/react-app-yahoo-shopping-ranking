@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import Drawer from 'material-ui/Drawer'
+import List, { ListItem, ListItemText } from 'material-ui/List'
 
-export default function Nav({ categories }) {
+export default function Nav({ categories, onClick }) {
   console.log(`categories: ${JSON.stringify(categories)}`)
   // 遷移先
   const to = (category) => (
@@ -10,17 +12,20 @@ export default function Nav({ categories }) {
   )
 
   return (
-    <ul>
-      {/* ここではliタグ要素を作成しそのままHTMLとして返している */}
-      {categories.map((category) => (
-        <li key={`nav-item-${category.id}`}>
-          <Link to={to(category)}>
-            {category.name}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
+    <Drawer type="permanent">
+      <List style={{ width: 240 }}>
+        {categories.map(category => (
+          <ListItem
+            button
+            key={`menu-item-${category.id}`}
+            onClick={() => onClick(to(category))}
+          >
+            <ListItemText primary={category.name} />
+          </ListItem>
+        ))}
+      </List>
+    </Drawer>
+  );
 }
 
 Nav.propTypes = {

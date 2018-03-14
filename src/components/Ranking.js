@@ -20,9 +20,9 @@ export default class Ranking extends React.Component {
       <div>
         {/* ランキングのタイトル */}
         <h2>{
-          typeof category !== 'undefined'
+          typeof category !== 'undefined' && category.name
           ? `${category.name}'s Ranking`
-          : 'none'
+          : ''
         }</h2>
 
         {(() => {
@@ -30,7 +30,7 @@ export default class Ranking extends React.Component {
             // show error
             return <p>occured error, please reload this page.</p>
           } else if (typeof ranking === 'undefined') {
-            return <p>now loading...</p>
+            return <p>Now loading...</p>
           } else {
             return (
               <ol>
