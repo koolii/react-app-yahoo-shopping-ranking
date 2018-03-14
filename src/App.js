@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
+import Reboot from 'material-ui/Reboot'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
 
 // stateを使用するため素のcomponentからでなくcontainerから取得
 // containerがcomponentを使うためのデータを作成し、それをcomponentに渡している
@@ -10,9 +14,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*
-          カテゴリ名、IDはハードコーディング
-        */}
+        <Reboot />
+
+        <AppBar>
+          <Toolbar>
+            <Typography type="title" color="inherit">
+              Yahoo shopping Ranking App made by React/Redux
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
         <Nav />
 
         <Switch>
