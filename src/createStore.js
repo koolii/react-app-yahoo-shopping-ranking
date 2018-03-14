@@ -20,7 +20,7 @@ export default function createStore(history) {
     applyMiddleware(
       logger,
       thunk,
-      routerMiddleware,
+      routerMiddleware(history),
     ),
   )
 }
