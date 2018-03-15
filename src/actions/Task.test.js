@@ -1,7 +1,7 @@
 import actions from './Task'
 
-describe('Action - Task', () => {
-  it('addTask', () => {
+describe('Action(Task)', () => {
+  test('addTask', () => {
     const task = 'dummy task'
     const result = actions.addTask(task)
     const expected = {
