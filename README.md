@@ -6,3 +6,5 @@ Reduxの非同期ActionCreeatorのテストをするためのライブラリ
 #### jest-fetch-mock
 Jest + Fetchを使っている場合にAPIリクエストのモックを簡単に行えるライブラリ
 (src/setupTest.jsを作成する必要がある)
+
+### enzymeはShallow Renderingのテスト

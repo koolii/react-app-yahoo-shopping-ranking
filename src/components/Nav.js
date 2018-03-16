@@ -5,7 +5,6 @@ import Drawer from 'material-ui/Drawer'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 
 export default function Nav({ categories, onClick }) {
-  console.log(`categories: ${JSON.stringify(categories)}`)
   // 遷移先
   const to = (category) => (
     category.id === '1' ? '/all' : `/category/${category.id}`
