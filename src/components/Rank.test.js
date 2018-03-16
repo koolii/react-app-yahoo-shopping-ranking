@@ -5,6 +5,20 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import Ranking from './Ranking'
 
+// この順番に実行コールバックが実行される
+beforeAll(() => {
+  console.log('beforeAll')
+})
+beforeEach(() => {
+  console.log('beforeEach')
+})
+afterEach(() => {
+  console.log('afterEach')
+})
+afterAll(() => {
+  console.log('afterAll')
+})
+
 // super rough
 test('Component(Ranking)Snapshot', () => {
   const props = {

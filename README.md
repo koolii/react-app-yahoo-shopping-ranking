@@ -8,3 +8,11 @@ Jest + Fetchを使っている場合にAPIリクエストのモックを簡単�
 (src/setupTest.jsを作成する必要がある)
 
 ### enzymeはShallow Renderingのテスト
+
+### react-test-rendererでのスナップショットテストについて
+スナップショットのテストが失敗した場合には下記２つの選択肢から選ぶ
+
+* コンポーネントまたはテストを修正し、再度テストを実行
+* スナップショット自体を更新
+
+スナップショットを更新する場合は `npm test -- --updateSnapshot` を実行する
