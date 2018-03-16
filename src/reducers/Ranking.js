@@ -4,6 +4,10 @@
 // export const noop = (state = {}) => state;
 
 const getRanking = (response) => {
+  if (!response) {
+    return []
+  }
+
   const ranking = []
   const itemLength = response.ResultSet.totalResultsReturned
 
@@ -30,7 +34,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     // このアクションの時にstate情報をリセットする
     case 'START_REQUEST':
-      console.log('REDUCER START_REQUEST')
       return {
         category: action.payload.category,
         ranking: undefined,
